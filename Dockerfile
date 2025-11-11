@@ -1,11 +1,10 @@
-# Use a lightweight base image
-FROM ubuntu:latest
+# Use a lightweight web server image
+FROM nginx:alpine
 
-# Set working directory
-WORKDIR /app
+# Copy a custom HTML file into the web server folder
+COPY index.html /usr/share/nginx/html/index.html
 
-# Copy all files into the container
-COPY . /app
+# Expose port 80 for web traffic
+EXPOSE 80
 
-# Example command (you can change this later)
-CMD ["echo", "Hello from Jenkins Docker build!"]
+# Nginx runs automatically in the foreground
