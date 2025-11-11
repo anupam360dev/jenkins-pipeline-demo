@@ -38,7 +38,13 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "🚀 Deploying the application..."
+                script {
+                    echo "🚀 Deploying the container..."
+                    // Stop any existing container with same name
+                    sh 'docker rm -f jenkins-demo-container || true'
+                    // Run new container on port 8081
+                    sh 'docker run -d --name jenkins-demo-container -p 8081:80 anupam360/jenkins-demo:latest'
+                }
             }
         }
     }
